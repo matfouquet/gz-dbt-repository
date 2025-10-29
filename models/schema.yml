@@ -13,9 +13,33 @@ sources:
        - name: sales
          identifier: raw_gz_sales
          description: this is the raw sales data
+         tests:
+            - unique:
+                column_name: "(orders_id||'-'||pdt_id)"
        - name: product
          identifier: raw_gz_product
          description: this is the raw product data
+         columns:
+           - name: products_id
+             description: ref of the product bought 
+             tests:
+               - unique
+               - not_null
        - name: ship
          identifier: raw_gz_ship
          description: this is the raw shipping data
+         columns:
+           - name: orders_id
+             description: ref of the order
+             tests:
+               - unique
+               - not_null
+
+
+
+
+
+
+
+
+
