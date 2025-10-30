@@ -34,7 +34,38 @@ sources:
              tests:
                - unique
                - not_null
+models:
+   - name: int_sales_margin
+     description: calculated purchase_cost and margin by joining raw sales and raw product
+     columns:
+       - name: orders_id
+         description: order ref
+       - name: products_id
+         description: product ref
+       - name: date_date
+         description: when the order has been placed
+       - name: purchase_cost
+         description: quantity*purchase_price
+       - name: margin
+         description: revenue-purchase_cost
+             
+   - name: int_orders_margin
+     description: calculated revenue, quantity, purchase cost, margin group by date and orders
+     columns:
+       - name: orders_id
+         description: orders ref
+         tests:
+          - unique
+          - not_null
 
+   - name: int_orders_operational
+     description: calculated operational margin
+     columns:
+       - name: orders_id
+         description: orders ref
+         tests:
+          - unique
+          - not_null
 
 
 
