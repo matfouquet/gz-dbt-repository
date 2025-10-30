@@ -10,3 +10,4 @@ SELECT
 *
 ,margin+shipping_fee-logcost-ship_cost AS operational_margin
 FROM orders_ship_join
+ORDER BY orders_id DESC
