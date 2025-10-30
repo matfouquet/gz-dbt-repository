@@ -13,6 +13,7 @@ USING (products_id)
 SELECT
 *
 ,revenue - purchase_cost AS margin
+, {{ margin_percent('revenue', 'purchase_cost') }} AS margin_percent  
 FROM produc_sales_join
 
 

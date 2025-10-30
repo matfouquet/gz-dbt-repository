@@ -33,7 +33,21 @@ sources:
              description: ref of the order
              tests:
                - unique
-               - not_null
+       - name: adwords
+         identifier: raw_gz_adwords
+         description: this is the raw adwords data
+       - name: bing
+         identifier: raw_gz_bing
+         description: this is the raw bing data
+       - name: criteo
+         identifier: raw_gz_criteo
+         description: this is the raw criteo data
+       - name: facebook
+         identifier: raw_gz_facebook
+         description: this is the raw facebook data
+
+     
+
 models:
    - name: int_sales_margin
      description: calculated purchase_cost and margin by joining raw sales and raw product
@@ -67,6 +81,39 @@ models:
           - unique
           - not_null
 
+   - name: int_campaigns
+     description: combine the 4 campaign sources         
+     tests:
+        - unique:
+            column_name: "(date_date||'-'||campaign_key)"
+
+   - name: int_campaigns_day
+     description: calculated ads cost, impression and click by date desc      
+     columns:
+       - name: date_date
+         description: date
+         tests:
+          - unique
+          - not_null
+
+   - name: finance_campaigns_day
+     description: after joining finance and campaign day files, we calculate the ads margin     
+     columns:
+       - name: date_date
+         description: date
+         tests:
+          - unique
+          - not_null
+    
+   - name: finance_campaigns_month
+     description: using the day file we do it by month     
+     columns:
+       - name: datemonth
+         description: date
+         tests:
+          - unique
+          - not_null
+    
 
 
 
